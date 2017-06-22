@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Felinorte's Colonies</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+  </head>
+
+  <body>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded navbar-inverse bg-primary">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <%= link_to "Felinorte's Colonies", colonies_path, :class => "navbar-brand" %>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to 'Administration', colonies_path, :class => "nav-link #{yield(:colonies_active)}" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Statistics', statistics_path, :class => "nav-link #{yield(:statistics_active)}" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Tasks', tasks_path, :class => "nav-link #{yield(:tasks_active)}" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link'  %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Login", user_google_oauth2_omniauth_authorize_path, :class => 'nav-link'  %>
+            </li>
+          <% end %>
+        </ul>
+        <% if user_signed_in? %>
+          <span class="navbar-text">
+            Signed user: <%= current_user.email %>
+          </span>
+        <% end %>
+      </div>
+    </nav>
+    <br>
+    <div class="container">
+      <% if notice %>
+        <div class="alert alert-info alert-dismissible fade show" role="alert" id="error_explanation">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong><p id="notice"><%= notice %></p></strong>
+        </div>
+      <% end %>
+      
+      <% if alert %>
+        <div class="alert alert-info alert-dismissible fade show" role="alert" id="error_explanation">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong><p id="alert"><%= alert %></p></strong>
+        </div>
+      <% end %>
+      
+      <%= yield %>      
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<% provide(:statistics_active, 'active') %>
+
+<br>
+<h1>Statistics</h1>
+<br>
+
+<%= form_tag("/statistics", :method => "get") do %>
+    <div class="row">
+        <div class="field form-group col-6">
+            <%= text_field_tag :date1, params[:date1], :placeholder => "First date", :data => {:provide => 'datepicker' }, class: 'form-control' %>
+        </div>
+        
+        <div class="field form-group col-6">
+            <%= text_field_tag :date2, params[:date2], :placeholder => "Final date", :data => {:provide => 'datepicker' }, class: 'form-control' %>
+        </div>
+    </div>
+
+    <%= submit_tag("Search", class: 'btn btn-primary') %>
+<% end %>
+
+<br>
+
+<% if @chart_data %>
+    <p><strong>Occurred events</strong></p>
+    <div class="card">
+      <div class="card-block">
+        <center><%= pie_chart @chart_data %></center>
+      </div>
+    </div>
+<% end %>
+
+<br>
+
+<% if @chart_data2 %>
+    <p><strong>Assigned tasks</strong></p>
+    <div class="card">
+      <div class="card-block">
+        <center><%= column_chart @chart_data2 %></center>
+      </div>
+    </div>
+<% end %>

@@ -1,0 +1,10 @@
+<% provide(:colonies_active, 'active') %>
+
+<br>
+
+<h1>Editing Cat</h1>
+
+<%= render 'form', cat: @cat, colony: @colony %>
+
+<%# link_to 'Show', @cat %> |
+<%= link_to 'Back', colony_path(@colony), :class => 'btn btn-outline-danger' %>

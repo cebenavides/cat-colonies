@@ -1,0 +1,42 @@
+<%= form_with(model: [colony,cat,event], local: true) do |form| %>
+  <% if event.errors.any? %>
+    <div class="alert alert-warning" role="alert" id="error_explanation">
+      <strong><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</strong>
+
+      <ul>
+      <% event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field form-group">
+    <%= form.label :event_type %><br>
+    <%= form.select :event_type, Event.event_types.keys, {}, {class: "form-control"} %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :event_description, :class => 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :date_of_event %>
+    <%= form.date_select :date_of_event, id: :event_date_of_event, :class => 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :solved %>
+    <%= form.check_box :solved, id: :event_solved, :class => 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :solution_description %>
+    <%= form.text_area :solution_description, id: :event_solution_description, :class => 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Submit', :class => 'btn btn-outline-primary' %>
+  </div>
+<% end %>

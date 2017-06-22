@@ -1,0 +1,52 @@
+<%= form_with(model: [colony,cat], local: true, html: {multipart: true}) do |form| %>
+  <% if cat.errors.any? %>
+    <div class="alert alert-warning" role="alert" id="error_explanation">
+      <strong><%= pluralize(cat.errors.count, "error") %> prohibited this cat from being saved:</strong>
+
+      <ul>
+      <% cat.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label :code %>
+    <%= form.text_field :code, id: :cat_code, :class => 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :cat_name, :class => 'form-control'%>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :birthday %>
+    <%= form.date_select :birthday, id: :cat_birthday, :class => 'form-control' %>
+  </div>
+  
+  <div class="field form-group">
+    <%= form.label :personality %><br>
+    <%= form.select :personality, Cat.personalities.keys, {}, {class: "form-control"} %>
+  </div>
+  
+  <div class="field form-group">
+    <%= form.label :sex %><br>
+    <%= form.select :sex, Cat.sexes.keys, {}, {class: "form-control"} %>
+  </div>
+  
+  <div class="field form-group">
+    <%= form.label :age %><br>
+    <%= form.select :age, Cat.ages.keys, {}, {class: "form-control"} %>
+  </div>
+  
+  <div class="field form-group">
+    <%= form.label :image %>
+    <%= form.file_field :image, :class => 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Submit', :class => 'btn btn-outline-primary' %>
+  </div>
+<% end %>

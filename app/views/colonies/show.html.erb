@@ -1,0 +1,42 @@
+<% provide(:colonies_active, 'active') %>
+
+<br>
+
+<p>
+  <strong>Code:</strong>
+  <%= @colony.code %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @colony.description %>
+</p>
+
+<div class="card">
+  <div class="card-block">
+    <center><%= render_gmap_coordinate_picker :static => 'true', :api_key => "AIzaSyAkVvWQQ1ds_XiXzPXniBqRtmga5gtw1vE", :zoom_level => 18 , :map_width => 1000 , :default_coordinates => [@colony.latitude,@colony.longitude] %></center>
+  </div>
+</div>
+
+<br>
+
+<div class="card-columns">
+<% @cats.each do |cat| %>
+  <div class="card">
+    <%= image_tag cat.image.url, class:"card-img-top img-fluid" %>
+    <div class="card-block">
+      <h4 class="card-title"><%= cat.name %></h4>
+      <p class="card-text">Code: <%= cat.code %></p>
+      <p class="card-text">Birthday: <%= cat.birthday %></p>
+      <%= link_to 'Show', colony_cat_path(@colony,cat), :class => 'btn btn-primary' %>
+      <%= link_to 'Edit', edit_colony_cat_path(@colony,cat), :class => 'btn btn-warning' %>
+      <%= link_to 'Delete', colony_cat_path(@colony,cat), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<%= link_to 'New cat', new_colony_cat_path(@colony), :class => 'btn btn-outline-warning' %>
+<%= link_to 'Edit', edit_colony_path(@colony), :class => 'btn btn-outline-warning' %>
+<%= link_to 'Back', colonies_path, :class => 'btn btn-outline-danger' %>
+<br><br>

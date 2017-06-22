@@ -1,0 +1,9 @@
+<% provide(:colonies_active, 'active') %>
+
+<br>
+
+<h1>New Event</h1>
+
+<%= render 'form', colony: @cat.colony, cat: @cat, event: @event %>
+
+<%= link_to 'Back', colony_cat_path(@cat.colony,@cat) %>

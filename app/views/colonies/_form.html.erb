@@ -1,0 +1,36 @@
+<%= form_with(model: colony, local: true) do |form| %>
+  <% if colony.errors.any? %>
+    <div class="alert alert-warning" role="alert" id="error_explanation">
+      <strong><%= pluralize(colony.errors.count, "error") %> prohibited this colony from being saved:</strong>
+
+      <ul>
+      <% colony.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label :code %>
+    <%= form.text_field :code, id: :colony_code, :class => 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :colony_description, :class => 'form-control' %>
+  </div>
+  
+  <p>Location</p>
+  <div class="card">
+    <div class="card-block">
+      <center><%= form.gmap_coordinate_picker :lat_column => 'latitude', :lng_column => 'longitude' , :api_key => "AIzaSyAkVvWQQ1ds_XiXzPXniBqRtmga5gtw1vE", :zoom_level => 18, :map_width => 1000 , :default_coordinates => [11.019275, -74.850619], autocomplete: { enable: true, class: 'form-control' }  %></center>
+    </div>
+  </div>
+  
+  <br>
+  
+  <div class="actions">
+    <%= form.submit 'Submit', :class => 'btn btn-outline-primary' %>
+  </div>
+<% end %>

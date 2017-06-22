@@ -1,0 +1,35 @@
+<% provide(:tasks_active, 'active') %>
+
+<br>
+
+<h1>Tasks</h1>
+
+<br>
+
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>User</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.description %></td>
+        <td><%= task.start_date.to_formatted_s(:long) %></td>
+        <td><%= task.user.email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if current_user.admin? %>
+  <%= link_to 'New Task', new_task_path, :class => 'btn btn-outline-warning' %>
+<% end %>
